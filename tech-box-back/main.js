@@ -1,4 +1,4 @@
-
+const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 // 引入Express框架
 const express = require('express');
@@ -8,6 +8,7 @@ const app = express();
 const port = 3005;
 
 const cors = require('cors');
+const KEY = "jsuoeSSLDl(@(#&7lsjfl7992SLSLFLsisoo(((626364xnljsjlsfjlsfjlsdjlf221422l....j,&&(&(X*&(";
 
 // 允许所有来源
 app.use(cors());
@@ -36,7 +37,7 @@ db.connect((err) => {
 app.post('/news', (req, res) => {
     if (req.body.method === 'get_news_list') {
         // 执行SQL查询以获取除content字段外的所有新闻数据
-        db.query('SELECT id, title, subtitle, image_url, publish_time, preface FROM news_content', (err, results) => {
+        db.query('SELECT id, title, subtitle, image_url, publish_time, preface FROM news_content ORDER BY publish_time DESC', (err, results) => {
             if (err) {
                 // 如果查询过程中出现错误，发送错误响应
                 res.status(500).json({ error: '数据库查询失败' });
@@ -79,17 +80,111 @@ process.on('SIGINT', () => {
     });
 });
 
-// 创建一个路由处理GET请求
-app.get('/', (req, res) => {
-    // 发送响应数据
-    res.send('Hello World');
+// 登录路由
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    // 检查用户名和密码是否正确
+    checkUserCredentials(username, password, (err, user) => {
+        if (err) {
+            // 如果验证失败，发送错误响应
+            res.status(401).json({ error: '认证失败' });
+        } else {
+            // 如果验证成功，创建一个JWT
+            const token = jwt.sign(
+                { userId: user.id, username: user.username },
+                KEY, // 用于签名的密钥，应该是一个长的随机字符串
+                { expiresIn: '1h' } // 设置token过期时间
+            );
+            // 发送包含JWT的响应
+            res.json({ token });
+        }
+    });
+});
+// 用于检查用户名和密码的示例函数
+function checkUserCredentials(username, password, callback) {
+    // 这里应该有数据库查询来验证用户
+    // 以下是模拟的代码
+    const user = { id: 1, username: 'admin', password: '123456' };
+    if (username === user.username && password === user.password) {
+        callback(null, user);
+    } else {
+        callback(new Error('认证失败'));
+    }
+}
+
+
+// JWT验证中间件
+const authenticateToken = (req, res, next) => {
+    // 从请求头中获取token
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (token == null) {
+        // 如果没有token，返回401未授权状态码
+        return res.sendStatus(401);
+    }
+
+    jwt.verify(token, KEY, (err, user) => {
+        if (err) {
+            // 如果token无效或过期，返回403禁止状态码
+            return res.sendStatus(403);
+        }
+        // 如果验证成功，将解码后的用户信息添加到请求对象
+        req.user = user;
+        // 调用next()继续处理请求
+        next();
+    });
+};
+
+
+app.post('/publish', authenticateToken, (req, res) => {
+    // 从请求体中获取JSON字段
+    const { title, subtitle, image_url, publish_time, preface, content } = req.body;
+
+    // 创建SQL插入语句
+    const sqlInsert = `
+        INSERT INTO news_content (title, subtitle, image_url, publish_time, preface, content)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    // 执行SQL插入操作
+    db.query(sqlInsert, [title, subtitle, image_url, publish_time, preface, content], (err, results) => {
+        if (err) {
+            // 如果插入过程中出现错误，发送错误响应
+            console.error(err);
+            res.status(500).json({ success: false, message: '数据插入失败' });
+        } else {
+            // 如果插入成功，发送成功响应
+            res.json({ success: true, message: '数据插入成功' });
+        }
+    });
+});
+
+app.post('/delete', authenticateToken, (req, res) => {
+    // 从请求体中获取id数组
+    const ids  = req.body;
+    // 检查ids是否为数组且不为空
+    if (!Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({ success: false, message: '无效的ID列表' });
+    }
+
+    // 创建SQL删除语句
+    const sqlDelete = 'DELETE FROM news_content WHERE id IN (?)';
+
+    // 执行SQL删除操作
+    db.query(sqlDelete, [ids], (err, results) => {
+        if (err) {
+            // 如果删除过程中出现错误，发送错误响应
+            console.error(err);
+            res.status(500).json({ success: false, message: '数据库删除失败' });
+        } else {
+            // 如果删除成功，发送成功响应
+            res.json({ success: true, message: '数据删除成功', deletedCount: results.affectedRows });
+        }
+    });
 });
 
 
-// 添加一个新的GET路由来处理'/about'路径
-app.get('/about', (req, res) => {
-    res.send('关于页面');
-});
 
 // 让应用监听定义的端口号
 app.listen(port, () => {
