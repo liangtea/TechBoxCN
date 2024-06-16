@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 const Publish = () => {
   const [title, setTitle] = useState('');
@@ -8,13 +10,75 @@ const Publish = () => {
   const [preface, setPreface] = useState('');
   const [content, setContent] = useState('');
   const [validated, setValidated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false); // 新增状态控制提示显示
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+
+
+    const date = new Date();
+    const mysqlDateString = date.toISOString().slice(0, 19).replace('T', ' ');
+
+    if (form.checkValidity() === true) {
+      // 构建要发送的数据对象
+      const formData = {
+        title,
+        subtitle,
+        image_url: imageUrl,
+        preface,
+        content,
+        publish_time: mysqlDateString // 使用当前时间作为发布时间
+      };
+
+      // 从localStorage获取JWT
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // 如果没有token，重定向到登录页面
+        navigate('/login');
+        return;
+      }
+
+      // 发送POST请求到后端
+      fetch('http://localhost:3005/publish', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(response => {
+          if (!response.ok && response.status === 401) {
+            // 如果响应状态码为401，表示认证失败
+            throw new Error('认证失败，请重新登录。');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setShowAlert(true); // 显示成功提示
+          // 清空表单
+          setTitle('');
+          setSubtitle('');
+          setImageUrl('');
+          setPreface('');
+          setContent('');
+          setValidated(false); // 重置表单验证状态
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+        })
+        .catch(error => {
+          console.error(error);
+          // 认证失败或其他错误，重定向到登录页面
+          navigate('/login');
+        });
+    } else {
+      setValidated(true);
     }
+
     setValidated(true);
   };
 
@@ -22,6 +86,9 @@ const Publish = () => {
     <Container>
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
+          {showAlert && <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+            发布成功！
+          </Alert>}
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formTitle">
               <Form.Label>标题</Form.Label>
