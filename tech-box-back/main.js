@@ -5,8 +5,12 @@ const express = require('express');
 // 创建一个Express应用
 const app = express();
 // 定义端口号
-const port = 3000;
+const port = 3005;
 
+const cors = require('cors');
+
+// 允许所有来源
+app.use(cors());
 
 app.use(express.json());
 

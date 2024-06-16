@@ -19,7 +19,7 @@ const NavigationBar = () => {
                             height="40"
                             className="d-inline-block align-top"
                         />{' '}
-                        TechBox
+                        科技盒子
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
