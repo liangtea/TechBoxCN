@@ -1,26 +1,38 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css'; // 确保你有一个App.css文件来包含全局样式
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import './App.css';
 
-import Login from './Login'; // 主页组件
-import Publish from './Publish'; // 关于页面组件
-import Delete from './Delete'; // 联系方式页面组件
-import NavigationBar from './NavigationBar'; // 导航栏组件
+import Login from './Login';
+import Publish from './Publish';
+import Delete from './Delete';
+import NavigationBar from './NavigationBar';
 
-function App() {
+// 创建一个新组件来包含路由和导航栏逻辑
+const Layout = () => {
+  const location = useLocation();
+
+  return (
+    <>
+      {location.pathname !== '/login' && <NavigationBar />}
+      <Routes>
+        <Route path="/publish" element={<Publish />} />
+        <Route path="/delete" element={<Delete />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
+  );
+};
+
+const App = () => {
   return (
     <Router>
       <div className="App">
-        <NavigationBar />
-        <Routes>
-          <Route path="/publish" element={<Publish />} />
-          <Route path="/delete" element={<Delete />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <Layout />
       </div>
     </Router>
   );
-}
+};
 
 export default App;
+
