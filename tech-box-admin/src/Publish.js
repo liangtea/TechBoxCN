@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+const publishUrl = process.env.REACT_APP_PUBLISH_URL;
 
 const Publish = () => {
   const [title, setTitle] = useState('');
@@ -42,7 +43,7 @@ const Publish = () => {
       }
 
       // 发送POST请求到后端
-      fetch('http://localhost:3005/publish', {
+      fetch(publishUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

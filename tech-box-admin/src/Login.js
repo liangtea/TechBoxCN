@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import logo from './logo.png'; // 确保logo图片在正确的路径
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+
+const loginUrl = process.env.REACT_APP_LOGIN_URL;
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +14,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // 发送POST请求到后端的登录接口
-    fetch('http://localhost:3005/login', {
+    fetch(loginUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

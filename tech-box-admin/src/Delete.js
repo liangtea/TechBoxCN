@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Button, ListGroup, Form, Container, Row, Col, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+const newsUrl = process.env.REACT_APP_NEWS_URL;
+const deleteUrl = process.env.REACT_APP_DELETE_URL;
+
 const DeleteNews = () => {
   const [newsList, setNewsList] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
@@ -10,7 +13,7 @@ const DeleteNews = () => {
 
   // 获取新闻列表的函数
   const fetchNewsList = () => {
-    fetch('http://localhost:3005/news', {
+    fetch(newsUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -54,7 +57,7 @@ const DeleteNews = () => {
     }
 
     // 发送DELETE请求到后端
-    fetch('http://localhost:3005/delete', {
+    fetch(deleteUrl, {
       method: 'POST', // 或者如果后端期望DELETE方法，可以改为'DELETE'
       headers: {
         'Content-Type': 'application/json',
