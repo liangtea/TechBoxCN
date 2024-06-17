@@ -98,19 +98,22 @@ const DeleteNews = () => {
           </Alert>}
           <ListGroup>
             {newsList.map(news => (
-              <ListGroup.Item key={news.id} className="d-flex align-items-center">
+              <ListGroup.Item key={news.id} className="d-flex align-items-center" style={{ justifyContent: 'flex-start' }}>
                 <Form.Check
                   type="checkbox"
                   checked={selectedNews.includes(news.id)}
                   onChange={() => handleSelectNews(news.id)}
                 />
-                <div className="ms-2">
-                  <div className="fw-bold">{news.title}</div>
-                  <div>{news.date}</div>
+                <div className="ms-2" style={{ width: '100%' }}>
+                  <div className="fw-bold" style={{ textAlign: 'left' }}>{news.title}</div>
+                  <div style={{ fontSize: '0.75em', textAlign: 'left' }}>
+                    {new Date(news.publish_time).toISOString().replace(/T/, ' ').replace(/\..+/, '')}
+                  </div>
                 </div>
               </ListGroup.Item>
             ))}
           </ListGroup>
+
           <Button variant="danger" onClick={handleDeleteSelected} className="mt-3">
             删除
           </Button>
