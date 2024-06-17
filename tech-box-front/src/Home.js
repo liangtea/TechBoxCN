@@ -3,13 +3,16 @@ import { Container, Row, Col, ListGroup, Image, Modal } from 'react-bootstrap';
 import logo from './logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const Home = () => {
     const [listItems, setListItems] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState({});
-
+    
+    console.log(apiUrl);
     useEffect(() => {
-        fetch('http://localhost:3005/news', {
+        fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +35,7 @@ const Home = () => {
     }, []);
 
     const fetchNewsDetail = (id) => {
-        fetch('http://localhost:3005/news', {
+        fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
