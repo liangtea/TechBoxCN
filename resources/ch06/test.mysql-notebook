@@ -1,0 +1,703 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\ncreate database tech_box;\n-- 选择数据库\nUSE tech_box;\n\n-- 创建新闻内容表\nCREATE TABLE news_content (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    title VARCHAR(255) NOT NULL,\n    subtitle VARCHAR(255),\n    publish_time DATETIME NOT NULL,\n    preface TEXT,\n    image_url VARCHAR(255),\n    content TEXT\n);\nSELECT * FROM news_content;\nINSERT INTO news_content (title, subtitle, publish_time, preface, image_url, content)\nVALUES ('新闻标题', '子标题', '2024-06-15 19:18:56', '前言内容', '图片地址', '正文内容');\nSELECT * FROM news_content;\nDELETE FROM news_content WHERE id = 1;\nSELECT * FROM news_content;\nINSERT INTO news_content (title, subtitle, publish_time, preface, image_url, content)\nVALUES ('新闻标题1', '子标题1', '2024-06-15 19:18:56', '前言内容1', '图片地址1', '正文内容1'),\n('新闻标题2', '子标题2', '2024-06-15 19:18:56', '前言内容2', '图片地址2', '正文内容2');\nSELECT * FROM news_content;\nUPDATE news_content\nSET title = '更新后的标题', subtitle = '更新后的子标题', content = '更新后的正文内容'\nWHERE id = 2;\nSELECT * FROM news_content;\n",
+    "options": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "indentSize": 4,
+        "defaultEOL": "CRLF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 24,
+                    "column": 54
+                },
+                "position": {
+                    "lineNumber": 24,
+                    "column": 54
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 19,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -6
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Ctrl+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 122,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "d2aa9a57-e8dd-429a-9d26-7ddb9b994b6f",
+                            "content": "OK, 1 row affected in 82.417ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 25
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 25,
+                            "length": 0
+                        },
+                        "contentStart": 24,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 15,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "307b4f2f-1d79-48f4-809b-afb55feb68fd",
+                            "content": "OK, 0 records retrieved in 0.999ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 1,
+                            "resultId": "221552fd-da9c-4907-c827-72a3d1095f9d",
+                            "content": "OK, 0 records retrieved in 303.472ms"
+                        }
+                    ]
+                },
+                "currentHeight": 46,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 22
+                        },
+                        "contentStart": 9,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 22,
+                            "length": 241
+                        },
+                        "contentStart": 35,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 16,
+                "end": 16,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "15706de0-2fa3-4ee7-bdbb-5098b1b7865d",
+                            "content": "OK, 0 records retrieved in 2.998ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 27
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 17,
+                "end": 18,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "895b9478-021b-478c-fe40-e0643939c5e8",
+                            "content": "OK, 1 row affected in 44.299ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 156
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 19,
+                "end": 19,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "074bd063-f5fd-46db-9e02-f49529f88657"
+                    ]
+                },
+                "currentHeight": 92,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 27
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 27,
+                            "length": 0
+                        },
+                        "contentStart": 26,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5942e16b-3d33-4919-ec1d-c5971a5b6380",
+                    "resultId": "074bd063-f5fd-46db-9e02-f49529f88657",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "新闻标题",
+                            "2": "子标题",
+                            "3": "2024-06-15 19:18:56",
+                            "4": "前言内容",
+                            "5": "图片地址",
+                            "6": "正文内容"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "title",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "subtitle",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "publish_time",
+                            "field": "3",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "preface",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "image_url",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "content",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0s"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * FROM news_content"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 20,
+                "end": 20,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "c88d9977-8246-4a17-83a5-6720961df61b",
+                            "content": "OK, 1 row affected in 65.259ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 38
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 21,
+                "end": 21,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "450d0f1a-7ed8-47b5-dbbb-0986bce89ca1",
+                            "content": "OK, 0 records retrieved in 0s"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 27
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 22,
+                "end": 24,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "07b33a1f-0d3e-45fc-9546-06aee62415f3",
+                            "content": "OK, 2 rows affected in 54.998ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 230
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 25,
+                "end": 25,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "71353ff1-3846-4b61-d239-8904e7ec0c47"
+                    ]
+                },
+                "currentHeight": 115.1875,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 27
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 27,
+                            "length": 0
+                        },
+                        "contentStart": 26,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5942e16b-3d33-4919-ec1d-c5971a5b6380",
+                    "resultId": "71353ff1-3846-4b61-d239-8904e7ec0c47",
+                    "rows": [
+                        {
+                            "0": 2,
+                            "1": "新闻标题1",
+                            "2": "子标题1",
+                            "3": "2024-06-15 19:18:56",
+                            "4": "前言内容1",
+                            "5": "图片地址1",
+                            "6": "正文内容1"
+                        },
+                        {
+                            "0": 3,
+                            "1": "新闻标题2",
+                            "2": "子标题2",
+                            "3": "2024-06-15 19:18:56",
+                            "4": "前言内容2",
+                            "5": "图片地址2",
+                            "6": "正文内容2"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "title",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "subtitle",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "publish_time",
+                            "field": "3",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "preface",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "image_url",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "content",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 0s"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * FROM news_content"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 26,
+                "end": 28,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "25725449-0382-4f20-bf72-8d1888cbd788",
+                            "content": "OK, 1 row affected in 46.528ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 98
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 29,
+                "end": 29,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "2303f923-7740-4ca3-a768-cd840097b92b"
+                    ]
+                },
+                "currentHeight": 115.1875,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 27
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5942e16b-3d33-4919-ec1d-c5971a5b6380",
+                    "resultId": "2303f923-7740-4ca3-a768-cd840097b92b",
+                    "rows": [
+                        {
+                            "0": 2,
+                            "1": "更新后的标题",
+                            "2": "更新后的子标题",
+                            "3": "2024-06-15 19:18:56",
+                            "4": "前言内容1",
+                            "5": "图片地址1",
+                            "6": "更新后的正文内容"
+                        },
+                        {
+                            "0": 3,
+                            "1": "新闻标题2",
+                            "2": "子标题2",
+                            "3": "2024-06-15 19:18:56",
+                            "4": "前言内容2",
+                            "5": "图片地址2",
+                            "6": "正文内容2"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "title",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "subtitle",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "publish_time",
+                            "field": "3",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "preface",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "image_url",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "content",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 0s"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * FROM news_content"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 30,
+                "end": 30,
+                "language": "mysql",
+                "currentHeight": 180,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
